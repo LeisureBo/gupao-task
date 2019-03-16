@@ -80,6 +80,7 @@ private void configSubDes(StompHeaderAccessor accessor) {
 	// ...
 }
 ```
+
 * 使用策略模式重构后订阅配置：
 
 ```
@@ -101,19 +102,20 @@ private void configSubDes(StompHeaderAccessor accessor) {
 	String userId = accessor.getUser().getName();
 	// 获取订阅后缀
 	String subSuffix = subDest.substring(subPrefix.length());
-	
-  // 根据订阅前缀获取订阅处理器
-  SubscribeHandler handler = SubscribeHandlerHolder.getHandler(subPrefix);
-  // 如果处理器不存在则抛出异常
-  if(handler == null){
-    throw new RuntimeException("Illegal subscription path '" + subDest + "'");
-  }
-  // 执行配置并初始化
-  handler.config(subSuffix, userId);
+
+	// 根据订阅前缀获取订阅处理器
+	SubscribeHandler handler = SubscribeHandlerHolder.getHandler(subPrefix);
+	// 如果处理器不存在则抛出异常
+	if(handler == null){
+		throw new RuntimeException("Illegal subscription path '" + subDest + "'");
+	}
+	// 执行配置并初始化
+	handler.config(subSuffix, userId);
 
 	// ...
 }
 ```
+
 * 相关配置类
 
 ```
@@ -134,6 +136,8 @@ public abstract class SubscribeHandler {
 	public abstract void config(String subSuffix, String userId);
 
 }
+```
+
 
 ```
 public class SubscribeHandlerHolder {
@@ -161,6 +165,7 @@ public class SubscribeHandlerHolder {
 	}
 }
 ```
+
 
 ```
 public class TopicSubscribeHandler extends SubscribeHandler {
@@ -199,6 +204,7 @@ public class OperSubscribeHandler extends SubscribeHandler {
 
 }
 ```
+
 
 ```
 public class UserSubscribeHandler extends SubscribeHandler {
