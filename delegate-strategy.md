@@ -4,7 +4,7 @@
 
 * 以spring-mvc的DispatcherServlet为例，spring-mvc将所有请求分发给不同的handler处理
 
-
+<img src="pics/DispatcherServlet.png"/>
 
 ### 利用策略模式重构一段业务代码
 
